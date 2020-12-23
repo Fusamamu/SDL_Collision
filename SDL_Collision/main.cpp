@@ -6,12 +6,13 @@
 //
 
 #include <iostream>
+#include <vector>
 #include <math.h>
 #include "SDL2/SDL.h"
 
 struct Vector2D{
 public:
-    int x, y;
+    float x, y;
     
     Vector2D():x(0), y(0){}
     Vector2D(int xx, int yy):x(xx), y(yy){}
@@ -73,7 +74,7 @@ public:
         m_direction(Vector2D(1,1))
     {
         m_srcRect = {0, 0, 20, 20};
-        m_desRect = {m_position.x, m_position.y, m_width, m_height};
+        m_desRect = {static_cast<int>(m_position.x), static_cast<int>(m_position.y), m_width, m_height};
     }
     ~GameObject(){ std::cout<< "Game Object Destroyed" << std::endl; }
     
@@ -98,6 +99,16 @@ public:
         }
     }
     
+
+    void SetWidth(int w) { m_width = w; }
+    void SetHeight(int h) { m_height = h; }
+    void SetSize(int w, int h) {
+        m_width = w;
+        m_height = h;
+        SetCenter(m_width/2, m_height/2); }
+    void SetCenter(int x, int y) { m_center = Vector2D(x, y); }
+    
+    void SetPosition(const Vector2D& pos) { m_position = pos; }
     const Vector2D& GetPosition() { return m_position; }
     void SetSpeed(float speed) { m_speed = speed; }
     const float GetSpeed() const { return m_speed; }
@@ -193,6 +204,37 @@ bool CheckCollision(GameObject* A, GameObject* B)
         B->IsCollided() = false;
         return isCollided;
     }
+    
+
+}
+
+void OnCollisionResponse(GameObject* A, GameObject* B){
+    if(CheckCollision(A, B)){
+        if(A->IsCollided()){
+
+            if(A->GetMax_X() > B->GetMin_X() &&
+               A->GetMin_X() < B->GetMax_X() &&
+               A->GetPosition().y < B->GetMin_Y() &&
+               A->GetPosition().y > B->GetMax_Y()
+               ){
+                
+                Vector2D dir = A->GetDirection();
+                dir.x *= -1;
+                A->SetDirection(dir);
+            }
+                
+            if(A->GetMax_Y() < B->GetMin_Y() &&
+               A->GetMin_Y() > B->GetMax_Y() &&
+               A->GetPosition().x > B->GetMin_X()&&
+               A->GetPosition().x < B->GetMax_X()
+               ){
+
+                Vector2D dir = A->GetDirection();
+                dir.y *= -1;
+                A->SetDirection(dir);
+            }
+        }
+    }
 }
 
 int main(int argc, const char * argv[]) {
@@ -206,12 +248,22 @@ int main(int argc, const char * argv[]) {
     SDL_Window* window = SDL_CreateWindow("Collision Engine", NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     
-    GameObject* gameObject = new GameObject(renderer);
-    GameObject* go_B       = new GameObject(renderer);
-    go_B->SetDirection(Vector2D(1,0));
-    go_B->SetSpeed(100);
     
-
+    std::vector<GameObject*> gameObjectPool;
+    
+    GameObject* go_A = new GameObject(renderer);
+    go_A->SetSize(20, 20);
+    go_A->SetPosition(Vector2D(50, 100));
+    go_A->SetDirection(Vector2D(1, 1));
+    go_A->SetSpeed(120);
+    GameObject* go_B = new GameObject(renderer);
+    go_B->SetSize(150, 150);
+    go_B->SetPosition(Vector2D(250, 140));
+    go_B->SetDirection(Vector2D(-1, 1));
+    go_B->SetSpeed(0);
+    
+    gameObjectPool.push_back(go_A);
+    gameObjectPool.push_back(go_B);
     
     bool GameRunning = true;
     while (GameRunning) {
@@ -222,34 +274,31 @@ int main(int argc, const char * argv[]) {
             case SDL_QUIT:
                 GameRunning = false;
                 break;
-                
-            default:
-                break;
         }
         
-        gameObject->Move(GetDeltaTime());
-        go_B->Move(GetDeltaTime());
+        for(auto go: gameObjectPool){
+            go->Move(GetDeltaTime());
+            StayWithinFrame(go, 0, 640, 0, 480);
+        }
+           
+        OnCollisionResponse(go_A, go_B);
+        OnCollisionResponse(go_B, go_A);
         
-        StayWithinFrame(gameObject, 0, 640, 0, 480);
-        StayWithinFrame(go_B, 0, 640, 0, 480);
-        
-        CheckCollision(gameObject, go_B);
-        
-        gameObject->OnCollided();
+        go_A->OnCollided();
         go_B->OnCollided();
         
         SDL_SetRenderDrawColor(renderer, 255, 198, 84, 255);
         SDL_RenderClear(renderer);
         
-        gameObject->Render();
-        go_B->Render();
-        
+        for(auto go: gameObjectPool){
+            go->Render();
+        }
         
         SDL_RenderPresent(renderer);
-        
     }
     
-    delete gameObject;
+    delete go_A;
+    delete go_B;
     
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
