@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B81EAF7E259220D300D3BA22 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81EAF7D259220D300D3BA22 /* main.cpp */; };
+		B81EAF872592212600D3BA22 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B81EAF862592212600D3BA22 /* libSDL2-2.0.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		B81EAF7A259220D300D3BA22 /* SDL_Collision */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Collision; sourceTree = BUILT_PRODUCTS_DIR; };
 		B81EAF7D259220D300D3BA22 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B81EAF862592212600D3BA22 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.12_1/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		B81EAF8B259222C600D3BA22 /* SDL_Collision.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SDL_Collision.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81EAF872592212600D3BA22 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +47,7 @@
 			children = (
 				B81EAF7C259220D300D3BA22 /* SDL_Collision */,
 				B81EAF7B259220D300D3BA22 /* Products */,
+				B81EAF852592212500D3BA22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +62,18 @@
 		B81EAF7C259220D300D3BA22 /* SDL_Collision */ = {
 			isa = PBXGroup;
 			children = (
+				B81EAF8B259222C600D3BA22 /* SDL_Collision.entitlements */,
 				B81EAF7D259220D300D3BA22 /* main.cpp */,
 			);
 			path = SDL_Collision;
+			sourceTree = "<group>";
+		};
+		B81EAF852592212500D3BA22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B81EAF862592212600D3BA22 /* libSDL2-2.0.0.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,16 +253,34 @@
 		B81EAF82259220D300D3BA22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = SDL_Collision/SDL_Collision.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.12_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		B81EAF83259220D300D3BA22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = SDL_Collision/SDL_Collision.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.12_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
