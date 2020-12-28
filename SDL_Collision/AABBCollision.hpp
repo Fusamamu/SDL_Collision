@@ -18,11 +18,6 @@ public:
     AABBCollision(){};
     ~AABBCollision(){};
     
-    enum type{
-      SAT,
-      MINKOWSKI,
-    };
-    
     void GetFrameConstraint(class GameObject* go, const Frame& frame){
         if(go->GetMax_X() > frame.right){
             go->Pos_X() = frame.right - go->GetWidth()/2;
@@ -48,11 +43,6 @@ public:
             isCollided = true;
         }
         
-        A->IsCollided() = isCollided;
-        B->IsCollided() = isCollided;
-        A->OnCollided();
-        B->OnCollided();
-        
         return isCollided;
     }
     
@@ -76,6 +66,7 @@ public:
     }
     
     bool MinkowskiCollisionCheck(GameObject* A, GameObject* B, Vector2D* penetration){
+        
         Frame minkowskiFrame;
         minkowskiFrame.bottom   = A->Frame().bottom - B->Frame().top;
         minkowskiFrame.top      = A->Frame().top    - B->Frame().bottom;
@@ -84,12 +75,7 @@ public:
         
         if (minkowskiFrame.left <= 0 && minkowskiFrame.right >= 0 &&
             minkowskiFrame.top <=0 && minkowskiFrame.bottom >= 0) {
-            
-            A->IsCollided() = true;
-            B->IsCollided() = true;
-            A->OnCollided();
-            B->OnCollided();
-            
+        
             float min = abs(minkowskiFrame.left);
             Vector2D tempPenetration (min, 0);
             
@@ -110,17 +96,8 @@ public:
             
             *penetration = tempPenetration;
            
-            
             return true;
         }
-        
-        A->IsCollided() = false;
-        B->IsCollided() = false;
-        
-        A->OnCollided();
-        B->OnCollided();
-        
-        
         return false;
     }
 };

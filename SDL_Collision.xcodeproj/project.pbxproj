@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		B81EAF7E259220D300D3BA22 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81EAF7D259220D300D3BA22 /* main.cpp */; };
 		B81EAF872592212600D3BA22 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B81EAF862592212600D3BA22 /* libSDL2-2.0.0.dylib */; };
+		B82AD84E259A260300C558A2 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B82AD84C259A260300C558A2 /* Component.cpp */; };
+		B861CE5125978CD8004FA6E3 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861CE4F25978CD8004FA6E3 /* GameEngine.cpp */; };
+		B861CE54259791A9004FA6E3 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861CE52259791A9004FA6E3 /* Grid.cpp */; };
+		B88190F52598D9E2008D1C5C /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B88190F32598D9E2008D1C5C /* Tile.cpp */; };
+		B88190F82598E211008D1C5C /* QuadTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B88190F62598E211008D1C5C /* QuadTree.cpp */; };
 		B8E8179F25946CF500E72A77 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E8179D25946CF500E72A77 /* GameObject.cpp */; };
 		B8E817A225946E7300E72A77 /* AABBCollision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8E817A025946E7300E72A77 /* AABBCollision.cpp */; };
 /* End PBXBuildFile section */
@@ -30,6 +35,16 @@
 		B81EAF7D259220D300D3BA22 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B81EAF862592212600D3BA22 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.12_1/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		B81EAF8B259222C600D3BA22 /* SDL_Collision.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SDL_Collision.entitlements; sourceTree = "<group>"; };
+		B82AD84C259A260300C558A2 /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
+		B82AD84D259A260300C558A2 /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
+		B861CE4F25978CD8004FA6E3 /* GameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameEngine.cpp; sourceTree = "<group>"; };
+		B861CE5025978CD8004FA6E3 /* GameEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameEngine.hpp; sourceTree = "<group>"; };
+		B861CE52259791A9004FA6E3 /* Grid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		B861CE53259791A9004FA6E3 /* Grid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Grid.hpp; sourceTree = "<group>"; };
+		B88190F32598D9E2008D1C5C /* Tile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tile.cpp; sourceTree = "<group>"; };
+		B88190F42598D9E2008D1C5C /* Tile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tile.hpp; sourceTree = "<group>"; };
+		B88190F62598E211008D1C5C /* QuadTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QuadTree.cpp; sourceTree = "<group>"; };
+		B88190F72598E211008D1C5C /* QuadTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = QuadTree.hpp; sourceTree = "<group>"; };
 		B8E8179B25946CB600E72A77 /* Vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vector2D.hpp; sourceTree = "<group>"; };
 		B8E8179D25946CF500E72A77 /* GameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		B8E8179E25946CF500E72A77 /* GameObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
@@ -78,6 +93,16 @@
 				B8E817A025946E7300E72A77 /* AABBCollision.cpp */,
 				B8E817A125946E7300E72A77 /* AABBCollision.hpp */,
 				B8E817A3259470A200E72A77 /* Frame.h */,
+				B861CE4F25978CD8004FA6E3 /* GameEngine.cpp */,
+				B861CE5025978CD8004FA6E3 /* GameEngine.hpp */,
+				B861CE52259791A9004FA6E3 /* Grid.cpp */,
+				B861CE53259791A9004FA6E3 /* Grid.hpp */,
+				B88190F32598D9E2008D1C5C /* Tile.cpp */,
+				B88190F42598D9E2008D1C5C /* Tile.hpp */,
+				B88190F62598E211008D1C5C /* QuadTree.cpp */,
+				B88190F72598E211008D1C5C /* QuadTree.hpp */,
+				B82AD84C259A260300C558A2 /* Component.cpp */,
+				B82AD84D259A260300C558A2 /* Component.hpp */,
 			);
 			path = SDL_Collision;
 			sourceTree = "<group>";
@@ -147,8 +172,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8E8179F25946CF500E72A77 /* GameObject.cpp in Sources */,
+				B82AD84E259A260300C558A2 /* Component.cpp in Sources */,
 				B81EAF7E259220D300D3BA22 /* main.cpp in Sources */,
 				B8E817A225946E7300E72A77 /* AABBCollision.cpp in Sources */,
+				B88190F52598D9E2008D1C5C /* Tile.cpp in Sources */,
+				B88190F82598E211008D1C5C /* QuadTree.cpp in Sources */,
+				B861CE5125978CD8004FA6E3 /* GameEngine.cpp in Sources */,
+				B861CE54259791A9004FA6E3 /* Grid.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
