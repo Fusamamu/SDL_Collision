@@ -11,24 +11,46 @@
 #include <stdio.h>
 #include <vector>
 #include "SDL2/SDL.h"
-
+#include "GameObject.hpp"
 
 class QuadTree{
 public:
-    QuadTree(int level, SDL_Rect bound);
+    QuadTree();
+    QuadTree(int maxObjects, int maxLevels, int level, SDL_Rect bound, QuadTree* parent);
     ~QuadTree();
     
+    void Insert(GameObject* go);
+    void Remove(GameObject* go);
     void Clear();
     
+    std::vector<GameObject*> Search(const SDL_Rect& area);
+    
+    const SDL_Rect& GetBound() const { return m_bound; }
+    
 private:
-    const int MAXOBJECTS = 10;
-    const int MAXLEVELS  = 5;
+    
+    void Search(const SDL_Rect& area, std::vector<GameObject*>& overlappedObjects);
+    
+    int GetChildIndexForObject(GameObject* go);
+    void Split();
+    
+    static const int thisTree = -1;
+    static const int childNE = 0;
+    static const int childNW = 1;
+    static const int childSW = 2;
+    static const int childSE = 3;
+    
+    int MAXOBJECTS;
+    int MAXLEVELS;
     
     int m_level;
-    std::vector<class GameObject*> m_Objects;
-    SDL_Rect m_bound;
-    QuadTree* m_nodes;
     
+    SDL_Rect m_bound;
+    
+    QuadTree* m_parent;
+    QuadTree* m_children[4];
+    
+    std::vector<GameObject*> m_objects;
 };
 
 #endif /* QuadTree_hpp */

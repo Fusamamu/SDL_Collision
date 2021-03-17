@@ -52,7 +52,7 @@ void GameEngine::LoadAssets(){
     m_grid = new Grid(25, 15, this);
     m_grid->SetColor({255, 100, 50, 100});
     
-    
+    m_quadTree = new QuadTree(1, 5, 0, {0, 0, static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGHT)}, NULL);
 }
 
 void GameEngine::RunLoop(){
@@ -78,12 +78,10 @@ void GameEngine::ProcessInput(){
     
     const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
-    
     if(keystates[SDL_SCANCODE_LEFT]){
         go_C->SetDirection(Vector2D(-1,0));
         go_C->SetSpeed(100);
         go_C->Move(GetDeltaTime());
-        
     }
     if(keystates[SDL_SCANCODE_RIGHT]){
         go_C->SetDirection(Vector2D(1,0));
@@ -103,7 +101,6 @@ void GameEngine::ProcessInput(){
 }
 
 void GameEngine::Update(){
-    
     aabbCollision->GetFrameConstraint(go_C, {0, 480, 0, 640});
 
     Vector2D penetration;
@@ -118,7 +115,6 @@ void GameEngine::Update(){
     }
     
     go_C->OnCollided();
-    
 }
 
 void GameEngine::Render(){
@@ -130,8 +126,6 @@ void GameEngine::Render(){
     for(auto go: m_gameobject_POOL){
         go->Render();
     }
-    
-    
     
     SDL_RenderPresent(m_renderer);
 }
@@ -165,5 +159,14 @@ float GameEngine::GetDeltaTime(){
     m_tickCounts = SDL_GetTicks();
     
     return deltaTime;
+}
+
+GameObject* GameEngine::CreateGameObject(){
+    GameObject* go = new GameObject(m_renderer);
+    go->SetSize(20, 20);
+    go->SetPosition(Vector2D(50,50));
+    go->SetDirection(Vector2D(1,1));
+    go->SetSpeed(20);
+    return go;
 }
 

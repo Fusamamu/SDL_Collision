@@ -23,9 +23,6 @@ GameObject::GameObject(SDL_Renderer* rend):
 {
     m_srcRect = {0, 0, 20, 20};
     m_desRect = {static_cast<int>(m_position.x), static_cast<int>(m_position.y), m_width, m_height};
-    
-   
-    
 }
 
 GameObject::~GameObject(){
@@ -33,25 +30,25 @@ GameObject::~GameObject(){
 }
 
 void GameObject::Awake(){
-    for(unsigned long i = m_components.size() - 1; i >= 0; i--){
+    for(Uint8 i = m_components.size() - 1; i >= 0; i--){
         m_components[i]->Awake();
     }
 }
 
 void GameObject::Start(){
-    for (unsigned long i = m_components.size() - 1 ; i >= 0; i-- ) {
+    for (Uint8 i = m_components.size() - 1 ; i >= 0; i-- ) {
         m_components[i]->Start();
     }
 }
 
 void GameObject::Update(float deltaTime){
-    for (unsigned long i = m_components.size() - 1; i >= 0; i--) {
+    for (Uint8 i = m_components.size() - 1; i >= 0; i--) {
         m_components[i]->Update(deltaTime);
     }
 }
 
 void GameObject::LateUpdate(float deltaTime){
-    for (unsigned long i = m_components.size() - 1; i >= 0; i--){
+    for (Uint8 i = m_components.size() - 1; i >= 0; i--){
         m_components[i]->LateUpdate(deltaTime);
     }
 }
@@ -67,10 +64,10 @@ void GameObject::Render(){
     if(m_renderType == SOLID){
         SDL_RenderFillRect(m_renderer, &m_desRect);
     }
-    
-//    for (unsigned long i = m_components.size() - 1; i >= 0; i--){
-//        m_components[i]->Render(m_renderer);
-//    }
+
+    for(signed long i = m_components.size() - 1; i >= 0; i--){
+        m_components[i]->Render(m_renderer);
+    }
 }
 
 template<typename T>
@@ -98,15 +95,12 @@ std::shared_ptr<T> GameObject::GetComponent(){
             return existingComp;
         }
     }
-    
     return nullptr;
 }
-
 
 void GameObject::Move(float deltaTime){
     m_position += GetDirection() * GetSpeed() * deltaTime;
 }
-
 
 void GameObject::OnCollided(){
     if(isCollided){

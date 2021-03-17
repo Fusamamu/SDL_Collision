@@ -22,7 +22,6 @@ public:
         return Vector2D(x + rhs.x, y + rhs.y);
     }
     
-    
     Vector2D operator- (Vector2D rhs) const {
         return Vector2D(x - rhs.x, y - rhs.y);
     }

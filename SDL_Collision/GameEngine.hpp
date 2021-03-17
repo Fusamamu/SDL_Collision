@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "SDL2/SDL.h"
-
+#include "QuadTree.hpp"
 
 class GameEngine{
 public:
@@ -26,9 +26,7 @@ public:
     void Render();
     void ShutDown();
     
-//    SDL_Texture* LoadTexture(const char* filePath);
-//    SDL_Texture* LoadText(const char* text, const char* font, SDL_Color c);
-    
+    GameObject* CreateGameObject();
     void AddGameObject(class GameObject* go);
     void RemoveGameObject(class GameObject* go);
     
@@ -48,6 +46,8 @@ private:
     
     float m_tickCounts = 0;
     
+    QuadTree* m_quadTree;
+    
     std::vector<class GameObject*> m_gameobject_POOL;
     
     class AABBCollision* aabbCollision;
@@ -56,8 +56,6 @@ private:
     GameObject* go_C;
     
     class Grid* m_grid;
-    
 };
-
 
 #endif /* GameEngine_hpp */

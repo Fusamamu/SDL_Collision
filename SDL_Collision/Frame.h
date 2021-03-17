@@ -8,11 +8,9 @@
 #ifndef Frame_h
 #define Frame_h
 
-
 struct Frame{
 public:
     float top, bottom, left, right;
 };
-
 
 #endif /* Frame_h */

@@ -74,11 +74,12 @@ public:
         return m_frame;
     }
     
+    const SDL_Rect& GetDestRect() const { return m_desRect; }
+    
     bool& IsCollided() { return isCollided; }
     
 private:
-    
-    
+
     SDL_Renderer* m_renderer;
     RENDERTYPE m_renderType;
     

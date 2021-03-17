@@ -7,7 +7,9 @@
 
 #include "Tile.hpp"
 
-Tile::Tile(SDL_Renderer* render):
+Tile::Tile(int i, int j, SDL_Renderer* render):
+m_i(i),
+m_j(j),
 GameObject(render),
 m_tileType(FLOOR){
     

@@ -24,6 +24,13 @@ public:
     class Tile* GetTile(int row, int column) const;
     class Tile* GetTile(float posX, float posY) const;
     
+    class Tile* GetAdjacent_top(Tile* selectedTile) const;
+    class Tile* GetAdjacent_bottom(Tile* selectedTile) const;
+    class Tile* GetAdjacent_left(Tile* selectedTile) const;
+    class Tile* GetAdjacent_right(Tile* selectedTile) const;
+    
+    int CalculateMahattanDistance(Tile* startNode, Tile* targetNode) const;
+    
     void SetColor(SDL_Color c);
     
     void ProcessInput();

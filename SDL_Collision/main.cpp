@@ -15,8 +15,6 @@
 #include "GameObject.hpp"
 #include "AABBCollision.hpp"
 
-
-
 void StayWithinFrame(GameObject* go, float left, float right, float top, float bottom){
     if(go->GetMax_X() > right || go->GetMin_X() < left){
         Vector2D vec = go->GetDirection();
@@ -30,7 +28,6 @@ void StayWithinFrame(GameObject* go, float left, float right, float top, float b
         go->SetDirection(vec);
     }
 }
-
 
 void OnCollisionResponse(GameObject* A, GameObject* B){
     Vector2D previousPos;
@@ -63,9 +60,6 @@ void OnCollisionResponse(GameObject* A, GameObject* B){
 //    }
 }
 
-
-
-
 int main(int argc, const char * argv[]) {
     
     GameEngine* GE = new GameEngine;
@@ -73,6 +67,6 @@ int main(int argc, const char * argv[]) {
     GE->LoadAssets();
     GE->RunLoop();
     GE->ShutDown();
-    
+
     return 0;
 }
